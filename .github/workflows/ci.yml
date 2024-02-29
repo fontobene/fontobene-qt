@@ -3,38 +3,8 @@ on: [push, pull_request]
 name: CI
 
 jobs:
-
-  qmake:
-    name: "qmake on ${{ matrix.container }}"
-    runs-on: ubuntu-latest
-    container: "${{ matrix.container }}"
-    strategy:
-      matrix:
-        include:
-          - container: "ubuntu:18.04"
-            packages: qt5-default qttools5-dev-tools
-          - container: "ubuntu:20.04"
-            packages: qt5-default qttools5-dev-tools
-          - container: "ubuntu:22.04"
-            packages: qtbase5-dev qttools5-dev-tools
-    env:
-      DEBIAN_FRONTEND: noninteractive
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install qt and build tools
-        run: |
-          apt-get update &&
-          apt-get install -y --no-install-recommends \
-            pkg-config g++ make ${{ matrix.packages }}
-      - name: Run qmake
-        run: mkdir build && cd build && qmake -r .. "QMAKE_CXXFLAGS=-Werror"
-      - name: Build
-        run: cd build && make -j8
-      - name: Run tests
-        run: build/tests/fontobene-qt5-tests
-
-  cmake:
-    name: "cmake on ${{ matrix.container }}"
+  build_and_test:
+    name: "${{ matrix.container }}"
     runs-on: ubuntu-latest
     container: "${{ matrix.container }}"
     strategy:

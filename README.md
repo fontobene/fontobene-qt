@@ -4,16 +4,6 @@ A header-only library to parse FontoBene stroke fonts with C++11/Qt5.
 
 ## Installing
 
-### qmake
-
-    $ mkdir build && cd build
-    $ qmake -r .. PREFIX=/usr
-    $ make -j8
-    $ tests/fontobene-qt5-tests
-    $ make install
-
-### cmake
-
     $ mkdir build && cd build
     $ cmake .. -DCMAKE_INSTALL_PREFIX=/usr
     $ make -j8
