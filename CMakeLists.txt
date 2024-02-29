@@ -5,13 +5,13 @@ if(${CMAKE_VERSION} VERSION_LESS 3.12)
 endif()
 
 # Define project
-project(fontobene_qt5
-    VERSION 0.2.0
+project(fontobene_qt
+    VERSION 1.0.0
     LANGUAGES CXX
 )
 
 # Options
-option(FONTOBENE_ENABLE_TESTS "Build tests for fontobene-qt5." ON)
+option(FONTOBENE_ENABLE_TESTS "Build tests for fontobene-qt." ON)
 
 # Use C++11
 set(CMAKE_CXX_STANDARD 11)
@@ -22,7 +22,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 find_package(Qt5 5.2.0 COMPONENTS Core REQUIRED)
 
 # Include subprojects
-add_subdirectory(fontobene-qt5)
+add_subdirectory(fontobene-qt)
 if(FONTOBENE_ENABLE_TESTS)
     add_subdirectory(tests)
 endif()

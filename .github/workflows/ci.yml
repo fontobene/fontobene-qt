@@ -32,4 +32,4 @@ jobs:
       - name: Build
         run: cd build && make -j8
       - name: Run tests
-        run: build/tests/fontobene-qt5-tests
+        run: build/tests/fontobene-qt-tests

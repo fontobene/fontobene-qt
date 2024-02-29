@@ -1,6 +1,6 @@
 # Add header-only library
-add_library(fontobene_qt5 INTERFACE)
-target_include_directories(fontobene_qt5
+add_library(fontobene_qt INTERFACE)
+target_include_directories(fontobene_qt
     INTERFACE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
         $<INSTALL_INTERFACE:include>
@@ -14,4 +14,4 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 # Alias to namespaced variant
-add_library(FontoBene::FontoBeneQt5 ALIAS fontobene_qt5)
+add_library(FontoBene::FontoBeneQt ALIAS fontobene_qt)
