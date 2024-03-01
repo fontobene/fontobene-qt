@@ -4,18 +4,32 @@ name: CI
 
 jobs:
   build_and_test:
-    name: "${{ matrix.container }}"
+    name: "${{ matrix.qt }} on ${{ matrix.container }}"
     runs-on: ubuntu-latest
     container: "${{ matrix.container }}"
     strategy:
       matrix:
         include:
-          - container: "ubuntu:18.04"
+          - qt: qt5
+            container: "ubuntu:18.04"
             packages: qt5-default qttools5-dev-tools
-          - container: "ubuntu:20.04"
+          - qt: qt5
+            container: "ubuntu:20.04"
             packages: qt5-default qttools5-dev-tools
-          - container: "ubuntu:22.04"
+          - qt: qt5
+            container: "ubuntu:22.04"
             packages: qtbase5-dev qttools5-dev-tools
+          - qt: qt6
+            container: "ubuntu:22.04"
+            packages: qt6-base-dev qt6-base-dev-tools
+          - qt: qt5-explicit
+            container: "ubuntu:22.04"
+            packages: qtbase5-dev qttools5-dev-tools qt6-base-dev qt6-base-dev-tools
+            cmake_flags: "-DFONTOBENE_QT_MAJOR_VERSION=5"
+          - qt: qt6-explicit
+            container: "ubuntu:22.04"
+            packages: qtbase5-dev qttools5-dev-tools qt6-base-dev qt6-base-dev-tools
+            cmake_flags: "-DFONTOBENE_QT_MAJOR_VERSION=6"
     env:
       DEBIAN_FRONTEND: noninteractive
     steps:
@@ -28,7 +42,7 @@ jobs:
       - name: Show cmake version
         run: cmake --version
       - name: Run cmake
-        run: mkdir build && cd build && cmake ..
+        run: mkdir build && cd build && cmake .. ${{ matrix.cmake_flags }}
       - name: Build
         run: cd build && make -j8
       - name: Run tests

@@ -10,7 +10,7 @@ add_definitions(-DTESTFILEPATH="${CMAKE_CURRENT_SOURCE_DIR}/fonto.bene")
 target_compile_options(fontobene_qt_tests PRIVATE -Werror -Wall -Wextra)
 
 # Linking
-target_link_libraries(fontobene_qt_tests fontobene_qt Qt5::Core)
+target_link_libraries(fontobene_qt_tests fontobene_qt ${FONTOBENE_QT}::Core)
 
 # Output binary name
 set_target_properties(fontobene_qt_tests PROPERTIES OUTPUT_NAME fontobene-qt-tests)
